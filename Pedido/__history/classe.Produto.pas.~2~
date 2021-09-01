@@ -1,0 +1,40 @@
+unit classe.Produto;
+
+interface
+
+type
+  TProduto = class
+  private
+
+  Public
+    Codigo: integer;
+    Descricao: String;
+    Preco: Double;
+    class procedure LerProduto(AValue: Integer);
+  end;
+
+implementation
+
+{ TProduto }
+
+uses uDataModule, System.SysUtils;
+
+class procedure TProduto.LerProduto(AValue: Integer);
+var
+  LSQL: String;
+  F: TProduto;
+begin
+  LSQL := 'select descricao, preco from produtos where codigo = ' + intToStr(Avalue);
+  DataModule1.fdquery1.open(LSQL);
+  F := TProduto.create;
+  try
+    F.Descricao := DataModule1.fdquery1.FieldByName('descricao').AsString;
+    F.Preco :=  DataModule1.fdquery1.FieldByName('preco').Value;
+  finally
+
+  end;
+
+
+end;
+
+end.

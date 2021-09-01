@@ -1,0 +1,35 @@
+unit classe.Pessoa;
+
+interface
+
+type
+  TCliente = class
+  private
+
+  Public
+    Codigo: Integer;
+    Nome: String;
+    Cidade: String;
+    UF: String;
+    procedure LerCliente(AValue : Integer);
+  end;
+
+
+implementation
+
+{ TCliente }
+
+uses uDataModule, System.SysUtils;
+
+procedure TCliente.LerCliente(AValue : Integer);
+var
+  LSQL: String;
+begin
+  LSQL := 'select nome from clientes where codigo = ' + intToStr(Avalue);
+  with DataModule1 do
+  begin
+    fdquery1.open(LSQL)
+  end;
+end;
+
+end.
